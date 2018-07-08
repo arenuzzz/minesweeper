@@ -1,8 +1,6 @@
 import React from "react";
 
-import Emoji from "./Emoji.jsx";
-
-import styles from "./App.less";
+import styles from "./Game.less";
 
 export default props => (
   <div className={styles.base}>

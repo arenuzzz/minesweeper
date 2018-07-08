@@ -13,6 +13,7 @@ module.exports = {
   },
   watch: isDevelopment,
   devtool: isDevelopment && "eval-source-map",
+
   module: {
     rules: [
       {
@@ -47,6 +48,7 @@ module.exports = {
       }
     ]
   },
+
   devServer: {
     historyApiFallback: true
   }

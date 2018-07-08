@@ -3,7 +3,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { Router, Route, Redirect, browserHistory } from "react-router";
 
-import App from "./components/App.jsx";
+import Game from "./components/Game.jsx";
 import StartPage from "./components/StartPage.jsx";
 import GamePage from "./containers/GamePage.jsx";
 
@@ -13,7 +13,7 @@ import "normalize.css";
 import "./assets/main.css";
 
 const routes = (
-  <Route component={App}>
+  <Route component={Game}>
     <Redirect from="/" to="start" />
     <Route path="start" component={StartPage} />
     <Route path="game" component={GamePage} />
