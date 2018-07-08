@@ -5,6 +5,7 @@ import { Router, Route, Redirect, browserHistory } from "react-router";
 
 import App from "./components/App.jsx";
 import StartPage from "./components/StartPage.jsx";
+import GamePage from "./containers/GamePage.jsx";
 
 import store from "./store";
 
@@ -15,6 +16,7 @@ const routes = (
   <Route component={App}>
     <Redirect from="/" to="start" />
     <Route path="start" component={StartPage} />
+    <Route path="game" component={GamePage} />
   </Route>
 );
 
