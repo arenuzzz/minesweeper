@@ -21,6 +21,47 @@ export function startGame(params) {
   return addMineCounts(game);
 }
 
+export function revealTile(game, tileId) {
+  const updatedGame = game
+    .set("moves", game.get("moves") + 1)
+    .setIn(["board", tileId, "isRevealed"], true);
+
+  return updatedGame.getIn(["board", tileId, "isMine"])
+    ? revealAllMines(updatedGame)
+    : revealAdjacentSelfTiles(updatedGame, tileId);
+}
+
+export function revealAdjacentSelfTiles(game, tileId) {
+  if (game.getIn(["board", tileId, "isMine"])) return game;
+  if (game.getIn(["board", tileId, "mineCount"]) === 0) {
+    const adjacentTileIds = getAdjacentTileIds(game, tileId);
+
+    return adjacentTileIds.reduce((newGame, id) => {
+      const isTileRevealed = game.getIn(["board", id, "isRevealed"]);
+
+      return isTileRevealed ? newGame : revealAdjacentSelfTiles(newGame, id);
+    }, setTileRevealed(game, tileId));
+  }
+  return setTileRevealed(game, tileId);
+}
+
+export function setTileRevealed(game, tileId) {
+  return game.setIn(["board", tileId, "isRevealed"], true);
+}
+
+export function revealAllMines(game) {
+  const newBoard = game
+    .get("board")
+    .map(tile => (tile.get("isMine") ? tile.set("isRevealed", true) : tile));
+  return game.set("board", newBoard);
+}
+
+export function flagTile(game, tileId) {
+  const isFlagged = ["board", tileId, "isFlagged"];
+
+  return game.setIn(isFlagged, !game.getIn(isFlagged));
+}
+
 function addMineCounts(game) {
   const board = game
     .get("board")

@@ -1,6 +1,15 @@
-import { START_GAME } from "../actions/constants";
+import {
+  START_GAME,
+  REVEAL_TILE,
+  TOGGLE_FLAGGED_TILE
+} from "../actions/constants";
 
-import { startGame, DEFAULT_GAME_STATE } from "../utils/minesweeper";
+import {
+  DEFAULT_GAME_STATE,
+  startGame,
+  revealTile,
+  flagTile
+} from "../utils/minesweeper";
 
 export default (state = DEFAULT_GAME_STATE, action) => {
   switch (action.type) {
@@ -8,6 +17,12 @@ export default (state = DEFAULT_GAME_STATE, action) => {
       const { rows, cols, mines } = action;
 
       return startGame({ rows, cols, mines });
+    }
+    case REVEAL_TILE: {
+      return revealTile(state, action.tileId);
+    }
+    case TOGGLE_FLAGGED_TILE: {
+      return flagTile(state, action.tileId);
     }
     default:
       return state;

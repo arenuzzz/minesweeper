@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import Emoji from './Emoji.jsx';
+import Emoji from "./Emoji.jsx";
 
-import styles from './EmojiStatus.less';
+import styles from "./EmojiStatus.less";
 
 export default props => {
-    const { status, mapper } = props;
+  const { status, mapper, restartGame } = props;
 
-    return (
-        <div className={styles.base}>
-            <Emoji type={mapper[status]} />
-        </div>
-    );
+  return (
+    <div className={styles.base} onClick={restartGame}>
+      <Emoji type={mapper[status]} />
+    </div>
+  );
 };
